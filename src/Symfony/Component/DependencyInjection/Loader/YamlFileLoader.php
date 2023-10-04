@@ -100,6 +100,7 @@ class YamlFileLoader extends FileLoader
         'autowire' => 'autowire',
         'bind' => 'bind',
         'constructor' => 'constructor',
+        'priority' => 'priority',
     ];
 
     private const DEFAULTS_KEYWORDS = [
