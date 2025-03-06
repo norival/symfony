@@ -286,4 +286,12 @@ class UploadedFile extends File
 
         return \sprintf($message, $this->getClientOriginalName(), $maxFilesize);
     }
+
+    /**
+     * @see \SplFileInfo::getRealPath()
+     */
+    public function getRealPath(): string|false
+    {
+        return $this->isValid() ? parent::getRealPath() : false;
+    }
 }

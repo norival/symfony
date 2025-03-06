@@ -344,4 +344,32 @@ class UploadedFileTest extends TestCase
 
         $this->assertEquals('webkitdirectory/test.txt', $file->getClientOriginalPath());
     }
+
+    public function testGetRealPathWithValidFile(): void
+    {
+        $file = new UploadedFile(
+            __DIR__.'/Fixtures/test.gif',
+            'original.gif',
+            null,
+            \UPLOAD_ERR_OK,
+            true
+        );
+
+        $this->assertEquals(__DIR__.'/Fixtures/test.gif', $file->getRealPath());
+    }
+
+    /**
+     * @dataProvider uploadedFileErrorProvider
+     */
+    public function testGetRealPathReturnsFalseOnUploadError(int $error): void
+    {
+        $file = new UploadedFile(
+            __DIR__.'/Fixtures/test.gif',
+            'original.gif',
+            null,
+            $error
+        );
+
+        $this->assertFalse($file->getRealPath());
+    }
 }
